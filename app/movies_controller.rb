@@ -27,18 +27,10 @@ end
   # If no arguments are passed, use default values:
   # title == "Home Alone"
   # release_date == 1990
-def can_be_created_in_a_block(args) 
-  if args == nil 
-    args = {}
-    args[:title] = "Home Alone"
-    args[:release_date] = 1990
-  end
-
+def can_be_created_in_a_block(args = {title: "Home Alone", release_date: 1990}) 
   Movie.create do |m|   
-    m.string :title
-    m.timestamp :release_date
-    #does this syntax not work because I'm not inheriting from Active Record?
-    #and where is it even getting the data? the lab has this formatting already setup
+    m.title = args[:title]
+    m.release_date[:release_date]
   end
 end
 
