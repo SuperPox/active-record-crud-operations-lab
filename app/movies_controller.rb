@@ -4,14 +4,15 @@
 # def make_a_new_movie_instance    # def make_a_new_movie_instance
 #   movie = __                     #   movie = Movie.new
 # end                              # end
+require 'pry'
 
 def can_be_instantiated_and_then_saved
-  movie = __
+  movie = Movie.new
   movie.title = "This is a title."
-  __
+  movie.save
 end
 
-def can_be_created_with_a_hash_of_attributes
+def can_be_created_with_a_hash_of_attributes #(attributes)
   # Initialize movie and then and save it
   attributes = {
       title: "The Sting",
@@ -20,21 +21,29 @@ def can_be_created_with_a_hash_of_attributes
       lead: "Paul Newman",
       in_theaters: false
   }
-  movie = __
+  movie = Movie.create(attributes)
 end
 
-def can_be_created_in_a_block(args = __)
   # If no arguments are passed, use default values:
   # title == "Home Alone"
   # release_date == 1990
-  
-  Movie.create do |m|
-    __
+def can_be_created_in_a_block(args) 
+  if args == nil 
+    args = {}
+    args[:title] = "Home Alone"
+    args[:release_date] = 1990
+  end
+
+  Movie.create do |m|   
+    m.string :title
+    m.timestamp :release_date
+    #does this syntax not work because I'm not inheriting from Active Record?
+    #and where is it even getting the data? the lab has this formatting already setup
   end
 end
 
 def can_get_the_first_item_in_the_database
-  __
+  SELECT FIRST_VALUE #FROM movies
 end
 
 def can_get_the_last_item_in_the_database
